@@ -64,7 +64,7 @@ const config = {
     ]
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: './src',
     port: 8000
   },
   plugins: [

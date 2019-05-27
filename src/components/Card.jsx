@@ -13,7 +13,7 @@ class Card extends Component {
   render() {
     return (
       <div className='card'>
-        <div className="card--btn">copy</div>
+        <div className="card--btn btn">copy</div>
       </div>
     )
   }
