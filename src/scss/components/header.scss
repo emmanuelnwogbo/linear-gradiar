@@ -1,3 +1,11 @@
+@mixin directionMenuSpans {
+  @for $i from 1 through 9 {
+    &:nth-child(#{$i}) {
+      transform: translateY(#{$i*3.5}rem);
+    }
+  }
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -9,6 +17,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1000;
 
   &__range {
     position: relative;
@@ -98,5 +107,82 @@
       transform: translateY(-1px);
       box-shadow: 0 .5rem 1rem rgba(#000000,.2);
     }
+  }
+
+  &__gradient--direction {
+    position: relative;
+    width: 15rem;
+    outline: none;
+    padding: .7rem 1rem;
+    text-align: center;
+    font-weight: 900;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all .2s;
+    background: #D81B60;
+    text-transform: uppercase;
+    transition: all .2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      & span {
+        @include directionMenuSpans
+      }
+    }
+
+    &-menu {
+      position: absolute;
+      bottom: -40rem;
+      left: 0;
+      width: 100%;
+      background: transparent;
+      background: #fff;
+      height: 40rem;
+      transform: translateY(-3rem);
+      z-index: -2;
+
+      & span {
+        transition: all .2s;
+
+        &:hover {
+          @include directionMenuSpans
+        }
+      }
+    }
+
+    &-span {
+      display: block;
+      background: #D81B60;
+      padding: .6rem 1rem;
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  &__gradient--direction-inputparent {
+      width: 6%;
+      height: 3rem;
+      background: red;
+
+      &-input {
+        width: 100%;
+        height: 100%;
+        font-size: 1.5rem;
+        font-family: inherit;
+        color: inherit;
+        outline: none;
+        padding: 1.5rem;
+        border-radius: 2px;
+        background-color: rbga(#fff, .5);
+        border: 1px solid #D81B60;
+        border-bottom: 3px solid #D81B60;
+        display: block;
+        transition: all .3s;
+      }
   }
 }

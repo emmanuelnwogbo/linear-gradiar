@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import './scss/main.scss';
-
 import Header from './components/Header';
 import Container from './components/Container';
 
@@ -9,7 +7,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      generateGradients: false
+      generateGradients: false,
+      direction: `to right bottom`
     }
   }
 
@@ -22,11 +21,15 @@ class App extends Component {
     }
   }
 
+  changeGradDirection = (direction) => {
+    this.setState({ direction })
+  }
+
   render() {
     return (
       <div>
-        <Header genGradientsFunctionApp={this.generateGradientsApp}/>
-        <Container generateGradients={this.state.generateGradients}/>
+        <Header changeGradDirection={this.changeGradDirection} genGradientsFunctionApp={this.generateGradientsApp}/>
+        <Container gradiantDirection={this.state.direction} generateGradients={this.state.generateGradients}/>
       </div>
     )
   }
