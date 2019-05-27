@@ -12,10 +12,11 @@ class Header extends Component {
   }
 
   render() {
+    const { genGradientsFunctionApp } = this.props;
     return (
       <div className="header">
         <div className="header--name">Gradiar</div>
-        <div className="header--btn-tweet header--btn-generate">Generate Colors</div>
+        <div className="header--btn-tweet header--btn-generate" onClick={genGradientsFunctionApp}>Generate Colors</div>
         <div className="header__range">
           <div className="header__range--bar"></div>
           <div className="header__range--handle"></div>

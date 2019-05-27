@@ -6,11 +6,27 @@ import Header from './components/Header';
 import Container from './components/Container';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      generateGradients: false
+    }
+  }
+
+  generateGradientsApp = () => {
+    const { generateGradients } = this.state;
+    if (!generateGradients) {
+      this.setState({ generateGradients: true }, () => {
+        this.setState({ generateGradients: false })
+      })
+    }
+  }
+
   render() {
     return (
       <div>
-        <Header />
-        <Container />
+        <Header genGradientsFunctionApp={this.generateGradientsApp}/>
+        <Container generateGradients={this.state.generateGradients}/>
       </div>
     )
   }
