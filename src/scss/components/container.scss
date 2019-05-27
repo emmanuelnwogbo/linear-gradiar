@@ -1,0 +1,14 @@
+.container {
+  display: grid;
+  margin: 0 auto;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(26.5rem, 1fr));
+  grid-gap: 1.1rem;
+  align-items: start;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: rgba(236, 240, 241,1.0);
+  text-transform: uppercase;
+  text-align: center;
+  padding: 8rem 4rem;
+}

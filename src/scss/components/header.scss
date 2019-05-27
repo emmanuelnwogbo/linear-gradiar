@@ -1,0 +1,61 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  background: #fff;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__range {
+    position: relative;
+    display: flex;
+    height: 4rem;
+    //background: red;
+    align-items: center;
+    justify-content: center;
+
+    &--bar {
+      width: 32rem;
+      padding: .8rem 0;
+      //background: green;
+      background: rgba(127, 140, 141,1.0);
+      border-radius: 2rem;
+      cursor: pointer;
+    }
+
+    &--handle {
+      height: 2.5rem;
+      width: 2.5rem;
+      //background: blue;
+      background: rgba(30, 55, 153,1.0);
+      border-radius: 50%;
+      cursor: pointer;
+      position: absolute;
+      top: .7rem;
+      left: 0;
+    }
+  }
+
+  &--name {
+    font-size: 2rem;
+    font-weight: 900;
+    color: transparent;
+    background: linear-gradient(to right, #302B63, #0F0C29);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  &--btn-tweet {
+    justify-self: end;
+    background: #03A9F4;
+    padding: .7rem 3rem;
+    font-weight: 900;
+    color: #fff;
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+}
