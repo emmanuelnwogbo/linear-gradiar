@@ -9,8 +9,18 @@ class Card extends Component {
       colors: [],
       gradient: false,
       gradiantDirection: `to right bottom`,
-      background: null
+      background: null,
+      rgb: ['r', 'g', 'b'],
     }
+  }
+
+  hexToRgb = (hex) => {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
   }
 
   handleGradientPainting = () => {  
@@ -22,7 +32,7 @@ class Card extends Component {
 
   generateGradient = () => {
     const { colors, gradient } = this.state;
-    const { gradiantDirection, generateColors } = this.props;
+    const { generateColors } = this.props;
     const generatedColors = generateColors(colors, gradient);
     this.setState({
       colors: generatedColors
@@ -34,8 +44,8 @@ class Card extends Component {
   }
 
   copyGradToClipBoard = (e) => {
-    let range = document.createRange();
-    let selection = window.getSelection();
+    const range = document.createRange();
+    const selection = window.getSelection();
     selection.removeAllRanges();
     console.log(e.target.previousSibling)
     range.selectNodeContents(e.target.previousSibling);
@@ -54,12 +64,20 @@ class Card extends Component {
 
   render() {
     const { gradient } = this.state;
-    const { generateGradients, gradiantDirection } = this.props;
+    const { gradiantDirection, initialRender } = this.props;
 
     if (gradient) {
+      let background = `linear-gradient(${gradiantDirection}, ${gradient})`
+      if (!initialRender) {
+        background = `linear-gradient(${gradiantDirection}, ${gradient})`;
+      }
+      //console.log(`these are the gradients`, gradient);
+      //console.log( `linear-gradient(${gradiantDirection}, ${gradient})`);
+      const valueToBeCopied = `linear-gradient(${gradiantDirection}, ${gradient})`;
+
       return (
         <div className='card' style={{
-          background: `linear-gradient(${gradiantDirection}, ${gradient})`
+          background
         }}>
         <p style={{
           textTransform: 'lowercase',
@@ -68,7 +86,7 @@ class Card extends Component {
           overflow: 'hidden',
           zIndex: '-1',
           opacity: '0'
-        }}>{`linear-gradient(${gradiantDirection}, ${gradient})`}</p>
+        }}>{valueToBeCopied}</p>
           <div className="card--btn btn" id={`linear-gradient(${gradiantDirection}, ${gradient})`} onClick={this.copyGradToClipBoard}>copy</div>
         </div>
       )

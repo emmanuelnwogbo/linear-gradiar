@@ -10,28 +10,7 @@ class Container extends Component {
     super(props);
     this.state = {
       numberOfColors: 2,
-      cards: [
-        `rgb(0, 76, 255), rgb(187, 0, 255)`,
-        `rgb(224, 255, 0), rgb(255, 66, 0)`,
-        `rgb(63, 0, 255), rgb(255, 77, 0)`,
-        `rgb(0, 39, 255), rgb(0, 255, 193)`,
-        `rgb(149, 255, 0), rgb(255, 95, 0)`,
-        `rgb(203, 255, 0), rgb(204, 0, 255)`,
-        `rgb(0, 132, 255), rgb(158, 255, 0)`,
-        `rgb(255, 0, 153), rgb(195, 0, 255)`,
-        `rgb(0, 239, 255), rgb(0, 255, 145)`,
-        `rgb(0, 106, 255), rgb(0, 46, 255)`,
-        `rgb(0, 169, 255), rgb(0, 255, 110)`,
-        `rgb(127, 0, 255), rgb(255, 97, 0)`,
-        `rgb(255, 75, 0), rgb(255, 96, 0)`,
-        `rgb(0, 255, 209), rgb(12, 255, 0)`,
-        `rgb(0, 70, 255), rgb(190, 0, 255)`,
-        `rgb(131, 0, 255), rgb(0, 46, 255)`,
-        `rgb(98, 255, 0), rgb(0, 145, 255)`,
-        `rgb(159, 0, 255), rgb(255, 0, 210)`,
-        `rgb(255, 209, 0), rgb(0, 221, 255)`,
-        `rgb(0, 255, 40), rgb(255, 0, 76)`
-      ]
+      cards: null
     }
   }
 
@@ -59,13 +38,42 @@ class Container extends Component {
   renderCards = () => {
     const { cards } = this.state;
     const { generateGradients, gradiantDirection } = this.props;
-    return cards.map(card => {
-      return (
-        <Suspense key={card} fallback={<div>loading</div>}>
-          <Card gradiantDirection={gradiantDirection} initialGradient={card} generateColors={this.generateColors} generateGradients={generateGradients}/>
-        </Suspense>
-      )
-    })
+    if (cards !== null) {
+      return cards.map(card => {
+        return (
+          <Suspense key={card} fallback={<div>loading</div>}>
+            <Card initialRender={this.props.initialRender} gradiantDirection={gradiantDirection} initialGradient={card} generateColors={this.generateColors} generateGradients={generateGradients}/>
+          </Suspense>
+        )
+      })
+    }
+  }
+
+  componentWillMount() {
+    //console.log(this.props);
+    const { gradientsOpacityOne, gradientsOpacityTwo } = this.props;
+    this.setState({ cards: [
+      `rgba(0, 76, 255, ${gradientsOpacityOne}), rgba(187, 0, 255, ${gradientsOpacityTwo})`,
+      `rgba(224, 255, 0, ${gradientsOpacityOne}), rgba(255, 66, 0, ${gradientsOpacityTwo})`,
+      `rgba(63, 0, 255, ${gradientsOpacityOne}), rgba(255, 77, 0, ${gradientsOpacityTwo})`,
+      `rgba(0, 39, 255, ${gradientsOpacityOne}), rgba(0, 255, 193, ${gradientsOpacityTwo})`,
+      `rgba(149, 255, 0, ${gradientsOpacityOne}), rgba(255, 95, 0, ${gradientsOpacityTwo})`,
+      `rgba(203, 255, 0, ${gradientsOpacityOne}), rgba(204, 0, 255, ${gradientsOpacityTwo})`,
+      `rgba(0, 132, 255, ${gradientsOpacityOne}), rgba(158, 255, 0, ${gradientsOpacityTwo})`,
+      `rgba(255, 0, 153, ${gradientsOpacityOne}), rgba(195, 0, 255, ${gradientsOpacityTwo})`,
+      `rgba(0, 239, 255, ${gradientsOpacityOne}), rgba(0, 255, 145, ${gradientsOpacityTwo})`,
+      `rgba(0, 106, 255, ${gradientsOpacityOne}), rgba(0, 46, 255, ${gradientsOpacityTwo})`,
+      `rgba(0, 169, 255, ${gradientsOpacityOne}), rgba(0, 255, 110, ${gradientsOpacityTwo})`,
+      `rgba(127, 0, 255, ${gradientsOpacityOne}), rgba(255, 97, 0, ${gradientsOpacityTwo})`,
+      `rgba(255, 75, 0, ${gradientsOpacityOne}), rgba(255, 96, 0, ${gradientsOpacityTwo})`,
+      `rgba(0, 255, 209, ${gradientsOpacityOne}), rgba(12, 255, 0, ${gradientsOpacityTwo})`,
+      `rgba(0, 70, 255, ${gradientsOpacityOne}), rgba(190, 0, 255, ${gradientsOpacityTwo})`,
+      `rgba(131, 0, 255, ${gradientsOpacityOne}), rgba(0, 46, 255, ${gradientsOpacityTwo})`,
+      `rgba(98, 255, 0, ${gradientsOpacityOne}), rgba(0, 145, 255, ${gradientsOpacityTwo})`,
+      `rgba(159, 0, 255, ${gradientsOpacityOne}), rgba(255, 0, 210, ${gradientsOpacityTwo})`,
+      `rgba(255, 209, 0, ${gradientsOpacityOne}), rgba(0, 221, 255, ${gradientsOpacityTwo})`,
+      `rgba(0, 255, 40, ${gradientsOpacityOne}), rgba(255, 0, 76, ${gradientsOpacityTwo})`
+    ]})
   }
 
   render() {

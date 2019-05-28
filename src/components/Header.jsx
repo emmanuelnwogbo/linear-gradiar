@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import '../scss/components/header.scss';
-//import Slider from './Slider'
+import Slider from './Slider'
 
 class Header extends Component {
   constructor(props) {
@@ -19,7 +19,13 @@ class Header extends Component {
         'deg'
       ],
       currentDirection: 'to right bottom',
-      initialDegree: 10
+      initialDegree: 10,
+      opacity: 'both colors',
+      opacityOptions: [
+        'first color',
+        'second color',
+        'both colors'
+      ]
     }
   }
 
@@ -48,6 +54,24 @@ class Header extends Component {
         return;
       }
       return <span onClick={changeGradDir} key={direction} className="header__gradient--direction-span">{direction}</span>
+    })
+  }
+
+  renderDirectionSpansOpacity = () => {
+    const { opacity, opacityOptions } = this.state;
+    return opacityOptions.map(option => {
+      if (opacity === option) {
+        return;
+      }
+      return <span id={option} onClick={this.setOpacityOption} key={option} className="header__gradient--direction-span">{option}</span>
+    })
+  }
+
+  setOpacityOption = (e) => {
+    const opacity = e.target.id;
+    this.setState({ opacity }, () => {
+      const { changeOpacityOptions } = this.props;
+      changeOpacityOptions(opacity)
     })
   }
 
@@ -90,8 +114,8 @@ class Header extends Component {
   }
 
   render() {
-    const { genGradientsFunctionApp } = this.props;
-    const { currentDirection } = this.state;
+    const { genGradientsFunctionApp, changeGradientsOpacity } = this.props;
+    const { currentDirection, opacity } = this.state;
     return (
       <div className="header">
         <div className="header--name">Gradiar</div>
@@ -103,10 +127,18 @@ class Header extends Component {
           </div>
         </div>
         {this.renderDegreeValues()}
-        <div className="header__range">
-          <div className="header__range--bar"></div>
-          <div className="header__range--handle"></div>
+        <div className="header__gradient--opacity">
+          <div className="header__gradient--opacity-label">
+            <p>opacity options:</p>
+          </div>
+          <div className="header__gradient--direction">
+            <p>{opacity}</p>
+            <div className="header__gradient--direction-menu">
+              {this.renderDirectionSpansOpacity()}
+            </div>
+          </div>
         </div>
+        <Slider changeGradientsOpacity={changeGradientsOpacity}/>
         <div className="header__svgs">
           <svg className="header__svgs--svg">
             <use xlinkHref="./img/sprite.svg#icon-github1" />
@@ -115,7 +147,7 @@ class Header extends Component {
             <use xlinkHref="./img/sprite.svg#icon-codepen" />
           </svg>
         </div>
-        <div className="header--btn-tweet">Tweet</div>
+        <div className="header--btn-tweet header--btn-tweet-btnposition">Tweet</div>
       </div>
     )
   }

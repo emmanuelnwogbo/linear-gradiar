@@ -15,9 +15,13 @@
   background: #fff;
   padding: 1.5rem 2rem;
   display: flex;
-  justify-content: space-between;
+  //justify-content: space-between;
   align-items: center;
   z-index: 1000;
+
+  & > div {
+    margin-right: 4rem;
+  }
 
   &__range {
     position: relative;
@@ -29,7 +33,7 @@
     transition: all .2s;
 
     &--bar {
-      width: 32rem;
+      width: 20rem;
       padding: .8rem 0;
       //background: green;
       background: rgba(127, 140, 141,1.0);
@@ -87,6 +91,11 @@
       cursor: pointer;
       transition: all .2s;
     }
+  }
+
+  &--btn-tweet-btnposition {
+    position: absolute;
+    right: 0;
   }
 
   &--btn-generate {
@@ -168,7 +177,7 @@
   }
 
   &__gradient--direction-inputparent {
-      width: 6%;
+      width: 4%;
       height: 3rem;
       background: red;
 
@@ -179,7 +188,7 @@
         font-family: inherit;
         color: inherit;
         outline: none;
-        padding: 1.5rem;
+        padding: 1.5rem .5;
         border-radius: 2px;
         background-color: rbga(#fff, .5);
         border: 1px solid #D81B60;
@@ -187,5 +196,18 @@
         display: block;
         transition: all .3s;
       }
+  }
+
+  &__gradient--opacity {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+
+    &-label {
+      margin-right: 1rem;
+      font-weight: 900;
+    }
   }
 }
