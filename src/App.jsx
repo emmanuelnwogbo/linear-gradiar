@@ -39,7 +39,7 @@ class App extends Component {
     if (currentOpacityOption === `both colors`) {
       return this.setState({ 
         gradientsOpacityOne: opacity,
-        gradientsOpacityTwo: opacity,
+        gradientsOpacityTwo: opacity, 
       });
     }
 
@@ -77,7 +77,11 @@ class App extends Component {
   }
 
   render() {
-    const { feedback, feedback_zIndex, feedback_opacity } = this.state;
+    const { 
+      feedback, 
+      feedback_zIndex, 
+      feedback_opacity 
+    } = this.state;
     return (
       <div>
         <div className="feedback" style={{

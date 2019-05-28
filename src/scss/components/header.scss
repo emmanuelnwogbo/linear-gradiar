@@ -14,12 +14,58 @@
   display: flex;
   background: #fff;
   padding: 1.5rem 2rem;
-  display: flex;
   align-items: center;
   z-index: 1000;
 
+  @media only screen and (max-width: 77.5em) {
+    padding: 1.5rem 1rem;
+  }
+
+  @media only screen and (max-width: 76.25em) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 25%;
+    height: 100%;
+    background: #fff;
+    padding: 1.5rem 2rem;
+    overflow-y: scroll;
+    align-items: center;
+    z-index: 1000;
+    flex-direction: column;
+    text-align: center;
+    transform: translateX(-22rem);
+    transition: all .2s;
+    cursor: pointer;
+
+    &:hover {  
+      transform: translateX(0);
+    }
+  }
+
+  @media only screen and (max-width: 63.75em) {
+    width: 32%
+  }
+
+  @media only screen and (max-width: 57.75em) {
+    width: 36%
+  }
+
   & > div {
     margin-right: 4rem;
+
+    @media only screen and (max-width: 92.3em) {
+      margin-right: 2rem;
+    }
+
+    @media only screen and (max-width: 83em) {
+      margin-right: 1rem;
+    }
+
+    @media only screen and (max-width: 76.25em) {
+      margin: 1rem 0;
+      width: 100%;
+    }
   }
 
   &__range {
@@ -84,12 +130,18 @@
       font-size: 1.3rem;
       cursor: pointer;
       transition: all .2s;
+
+      
     }
   }
 
   &--btn-tweet-btnposition {
     position: absolute;
     right: 0;
+
+    @media only screen and (max-width: 76.25em) {
+      position: relative;
+    }
   }
 
   &--btn-generate {
@@ -130,6 +182,11 @@
     align-items: center;
     color: #fff;
 
+    @media only screen and (max-width: 76.5em) {
+      width: 12rem;
+      padding: .7rem;
+    }
+
     &:hover {
       & span {
         @include directionMenuSpans
@@ -139,6 +196,12 @@
         height: 40rem;
         width: 100%;
         bottom: -40rem;
+        opacity: 1;
+
+        @media only screen and (max-width: 76.25em) {
+          height: 30rem;
+          bottom: -30rem;
+        }
       }
     }
 
@@ -152,6 +215,14 @@
       transform: translateY(-3rem);
       z-index: -2;
       color: #fff;
+
+      @media only screen and (max-width: 76.25em) {
+        bottom: 0;
+        z-index: 4000;
+        width: 100%;
+        transform: translateY(-2.5rem);
+        opacity: 0;
+      }
 
       & span {
         transition: all .2s;
@@ -197,6 +268,14 @@
     font-size: 1.3rem;
     display: flex;
     align-items: center;
+
+    @media only screen and (max-width: 76.25em) {
+      flex-direction: column;
+
+      & > div {
+        width: 100%;
+      }
+    }
 
     &-label {
       margin-right: 1rem;

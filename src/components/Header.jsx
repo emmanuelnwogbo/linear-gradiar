@@ -122,7 +122,9 @@ class Header extends Component {
         <div className="header--btn-tweet header--btn-generate" onClick={genGradientsFunctionApp}>Generate Colors</div>
         <div className="header__gradient--direction">
           <p>{currentDirection}</p>
-          <div className="header__gradient--direction-menu">
+          <div className="header__gradient--direction-menu" style={{
+            zIndex: `5000`
+          }}>
             {this.renderDirectionSpans()}
           </div>
         </div>
