@@ -119,42 +119,45 @@
     font-size: 1.3rem;
     cursor: pointer;
     transition: all .2s;
-    background: #D81B60;
+    background: #000000;
     text-transform: uppercase;
     transition: all .2s;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #fff;
 
     &:hover {
       & span {
         @include directionMenuSpans
       }
+
+      & .header__gradient--direction-menu {
+        height: 40rem;
+        width: 100%;
+        bottom: -40rem;
+      }
     }
 
     &-menu {
       position: absolute;
-      bottom: -40rem;
+      bottom: 40rem;
       left: 0;
-      width: 100%;
+      height: 0;
+      width: 0;
       background: transparent;
-      background: #fff;
-      height: 40rem;
       transform: translateY(-3rem);
       z-index: -2;
+      color: #fff;
 
       & span {
         transition: all .2s;
-
-        &:hover {
-          @include directionMenuSpans
-        }
       }
     }
 
     &-span {
       display: block;
-      background: #D81B60;
+      background: #000000;
       padding: .6rem 1rem;
       cursor: pointer;
       position: absolute;

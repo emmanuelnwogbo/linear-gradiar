@@ -8,7 +8,8 @@ class Card extends Component {
     this.state = {
       colors: [],
       gradient: false,
-      gradiantDirection: `to right bottom`
+      gradiantDirection: `to right bottom`,
+      background: null
     }
   }
 
@@ -32,13 +33,23 @@ class Card extends Component {
     })
   }
 
+  copyGradToClipBoard = (e) => {
+    let range = document.createRange();
+    let selection = window.getSelection();
+    selection.removeAllRanges();
+    console.log(e.target.previousSibling)
+    range.selectNodeContents(e.target.previousSibling);
+    selection.addRange(range);
+    document.execCommand('copy');
+  }
+
   componentDidMount() {
     const { initialGradient } = this.props;
     this.setState({ gradient: initialGradient })
   }
 
   componentWillUpdate() {
-    this.handleGradientPainting()
+    this.handleGradientPainting();
   }
 
   render() {
@@ -50,7 +61,15 @@ class Card extends Component {
         <div className='card' style={{
           background: `linear-gradient(${gradiantDirection}, ${gradient})`
         }}>
-          <div className="card--btn btn">copy</div>
+        <p style={{
+          textTransform: 'lowercase',
+          position: 'absolute',
+          width: '10%',
+          overflow: 'hidden',
+          zIndex: '-1',
+          opacity: '0'
+        }}>{`linear-gradient(${gradiantDirection}, ${gradient})`}</p>
+          <div className="card--btn btn" id={`linear-gradient(${gradiantDirection}, ${gradient})`} onClick={this.copyGradToClipBoard}>copy</div>
         </div>
       )
     }

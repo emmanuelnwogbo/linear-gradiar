@@ -44,6 +44,9 @@ class Header extends Component {
       const changeGradDir = () => {
         this.changeGradientDirection(direction)
       }
+      if (direction === currentDirection) {
+        return;
+      }
       return <span onClick={changeGradDir} key={direction} className="header__gradient--direction-span">{direction}</span>
     })
   }
