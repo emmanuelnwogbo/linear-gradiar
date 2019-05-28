@@ -15,7 +15,6 @@
   background: #fff;
   padding: 1.5rem 2rem;
   display: flex;
-  //justify-content: space-between;
   align-items: center;
   z-index: 1000;
 
@@ -27,32 +26,26 @@
     position: relative;
     display: flex;
     height: 4rem;
-    //background: red;
     align-items: center;
     justify-content: center;
-    transition: all .2s;
 
     &--bar {
       width: 20rem;
       padding: .8rem 0;
-      //background: green;
       background: rgba(127, 140, 141,1.0);
       border-radius: 2rem;
       cursor: pointer;
-      transition: all .2s;
     }
 
     &--handle {
       height: 2.5rem;
       width: 2.5rem;
-      //background: blue;
       background: linear-gradient(to right, #302B63, #0F0C29);;
       border-radius: 50%;
       cursor: pointer;
       position: absolute;
       top: .7rem;
       left: 0;
-      transition: all .2s;
     }
   }
 

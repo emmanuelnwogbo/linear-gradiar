@@ -10,25 +10,19 @@ class App extends Component {
       generateGradients: false,
       direction: `to right bottom`,
       initialRender: true,
-      gradientsOpacityOne: 1,
-      gradientsOpacityTwo: 1,
+      gradientsOpacityOne: `1`,
+      gradientsOpacityTwo: `1`,
       currentOpacityOption: 'both colors'
     }
   }
 
-  changeGradientsOpacity = () => {
-    const { currentOpacityOption } = this.state;
-    if (currentOpacityOption === 'both colors') {
-      return
-    }
-
-    if (currentOpacityOption === 'first color') {
-      return
-    }
-
-    if (currentOpacityOption === 'second color') {
-      return
-    }
+  changeGradientsOpacity = (opacity) => {
+    this.setState({ 
+      gradientsOpacityOne: opacity,
+      gradientsOpacityTwo: opacity,
+     }, () => {
+       //console.log(this.state.gradientsOpacityTwo)
+     })
   }
 
   changeOpacityOptions = (option) => {

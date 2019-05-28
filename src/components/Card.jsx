@@ -6,12 +6,15 @@ class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      colors: [],
-      gradient: false,
-      gradiantDirection: `to right bottom`,
-      background: null,
-      rgb: ['r', 'g', 'b'],
+      colors: false,
+      background: false,
+      firstGradient: false,
+      secondGradient: false,
     }
+  }
+
+  renderRgba = (color, a_value) => {
+    return `rgba(${color}, ${ a_value})`;
   }
 
   hexToRgb = (hex) => {
@@ -36,10 +39,6 @@ class Card extends Component {
     const generatedColors = generateColors(colors, gradient);
     this.setState({
       colors: generatedColors
-    }, () => {
-      this.setState(prevState => ({
-        gradient: `${prevState.colors.colors[0]}, ${prevState.colors.colors[1]}`
-      }))
     })
   }
 
@@ -54,40 +53,83 @@ class Card extends Component {
   }
 
   componentDidMount() {
-    const { initialGradient } = this.props;
-    this.setState({ gradient: initialGradient })
+    const { 
+      initialGradient, 
+    } = this.props;
+    const firstGradientArr = [];
+    const secondGradientArr = [];
+    let tracker = 0;
+    initialGradient.map(item => {
+      tracker+=1;
+      if (tracker <= 3) {
+        return firstGradientArr.push(item)
+      }
+      secondGradientArr.push(item)
+    });
+    const firstGradientString = firstGradientArr.toString();
+    const secondGradientString = secondGradientArr.toString();
+    const firstGradient = firstGradientString;
+    const secondGradient = secondGradientString;
+    this.setState({
+      firstGradient,
+      secondGradient
+    })
+  }
+
+  componentDidUpdate() {
+    //console.log('updated');
+    //console.log(this.props)
   }
 
   componentWillUpdate() {
+    const { gradientsOpacityOne, gradientsOpacityTwo } = this.props;
     this.handleGradientPainting();
   }
 
   render() {
-    const { gradient } = this.state;
-    const { gradiantDirection, initialRender } = this.props;
-
-    if (gradient) {
-      let background = `linear-gradient(${gradiantDirection}, ${gradient})`
-      if (!initialRender) {
-        background = `linear-gradient(${gradiantDirection}, ${gradient})`;
+    const { firstGradient, secondGradient, colors } = this.state;
+    const { 
+      initialRender,
+      gradiantDirection,
+      gradientsOpacityOne, 
+      gradientsOpacityTwo 
+    } = this.props;
+    if (firstGradient && secondGradient) {
+      if (!initialRender && colors) {
+        console.log(initialRender, colors)
+        const newColorOne = colors.colors[0];
+        const newColorTwo = colors.colors[1];
+        const rgbOne = `${this.hexToRgb(newColorOne).r}, ${this.hexToRgb(newColorOne).g}, ${this.hexToRgb(newColorOne).b}`;
+        const rgbTwo = `${this.hexToRgb(newColorTwo).r}, ${this.hexToRgb(newColorTwo).g}, ${this.hexToRgb(newColorTwo).b}`;
+        return (
+          <div className='card' style={{
+            background: `linear-gradient(${gradiantDirection},rgb(${rgbOne},${gradientsOpacityOne}),rgb(${rgbTwo},${gradientsOpacityTwo}))`
+          }}>
+          <p style={{
+            textTransform: 'lowercase',
+            position: 'absolute',
+            width: '10%',
+            overflow: 'hidden',
+            zIndex: '-1',
+            opacity: '0'
+          }}>{}</p>
+            <div className="card--btn btn" onClick={this.copyGradToClipBoard}>copy</div>
+          </div>
+        )
       }
-      //console.log(`these are the gradients`, gradient);
-      //console.log( `linear-gradient(${gradiantDirection}, ${gradient})`);
-      const valueToBeCopied = `linear-gradient(${gradiantDirection}, ${gradient})`;
-
       return (
         <div className='card' style={{
-          background
+          background: `linear-gradient(${gradiantDirection},rgba(${firstGradient},${gradientsOpacityOne}),rgba(${secondGradient}, ${gradientsOpacityTwo}))`
         }}>
-        <p style={{
-          textTransform: 'lowercase',
-          position: 'absolute',
-          width: '10%',
-          overflow: 'hidden',
-          zIndex: '-1',
-          opacity: '0'
-        }}>{valueToBeCopied}</p>
-          <div className="card--btn btn" id={`linear-gradient(${gradiantDirection}, ${gradient})`} onClick={this.copyGradToClipBoard}>copy</div>
+          <p style={{
+            textTransform: 'lowercase',
+            position: 'absolute',
+            width: '10%',
+            overflow: 'hidden',
+            zIndex: '-1',
+            opacity: '0'
+            }}>{}</p>
+          <div className="card--btn btn" onClick={this.copyGradToClipBoard}>copy</div>
         </div>
       )
     }
