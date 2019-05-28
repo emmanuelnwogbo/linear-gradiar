@@ -38,7 +38,13 @@ class Container extends Component {
 
   renderCards = () => {
     const { cards } = this.state;
-    const { generateGradients, gradiantDirection, gradientsOpacityOne, gradientsOpacityTwo } = this.props;
+    const { 
+      generateGradients, 
+      gradiantDirection, 
+      gradientsOpacityOne, 
+      gradientsOpacityTwo,
+      giveFeedBack
+    } = this.props;
     if (cards !== null) {
       return cards.map(card => {
         return (
@@ -50,7 +56,8 @@ class Container extends Component {
             generateColors={this.generateColors} 
             generateGradients={generateGradients}
             gradientsOpacityOne={gradientsOpacityOne}
-            gradientsOpacityTwo={gradientsOpacityTwo}/>
+            gradientsOpacityTwo={gradientsOpacityTwo}
+            giveFeedBack={giveFeedBack}/>
           </Suspense>
         )
       })

@@ -43,13 +43,14 @@ class Card extends Component {
   }
 
   copyGradToClipBoard = (e) => {
+    const { giveFeedBack } = this.props;
     const range = document.createRange();
     const selection = window.getSelection();
     selection.removeAllRanges();
-    console.log(e.target.previousSibling)
     range.selectNodeContents(e.target.previousSibling);
     selection.addRange(range);
     document.execCommand('copy');
+    giveFeedBack(e.target.previousSibling.innerHTML)
   }
 
   componentDidMount() {
@@ -74,11 +75,6 @@ class Card extends Component {
       firstGradient,
       secondGradient
     })
-  }
-
-  componentDidUpdate() {
-    //console.log('updated');
-    //console.log(this.props)
   }
 
   componentWillUpdate() {
@@ -112,7 +108,7 @@ class Card extends Component {
             overflow: 'hidden',
             zIndex: '-1',
             opacity: '0'
-          }}>{}</p>
+          }}>{`linear-gradient(${gradiantDirection},rgb(${rgbOne},${gradientsOpacityOne}),rgb(${rgbTwo},${gradientsOpacityTwo}))`}</p>
             <div className="card--btn btn" onClick={this.copyGradToClipBoard}>copy</div>
           </div>
         )
@@ -128,7 +124,7 @@ class Card extends Component {
             overflow: 'hidden',
             zIndex: '-1',
             opacity: '0'
-            }}>{}</p>
+            }}>{`linear-gradient(${gradiantDirection},rgba(${firstGradient},${gradientsOpacityOne}),rgba(${secondGradient}, ${gradientsOpacityTwo}))`}</p>
           <div className="card--btn btn" onClick={this.copyGradToClipBoard}>copy</div>
         </div>
       )

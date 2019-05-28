@@ -32,31 +32,29 @@ class Slider extends Component {
     const handle = document.getElementById('opacity--range--handle');
     const timelineWidth = timeline.offsetWidth - handle.offsetWidth;
     const newMargLeft = event.clientX - this.getElementPosition(timeline);
-    let gradientsOpacity;
 
     if (newMargLeft >= 0 && newMargLeft <= timelineWidth) {
       handle.style.marginLeft = newMargLeft + "px";
       console.log(newMargLeft);
-      gradientsOpacity = this.convertValueToOpacity(newMargLeft);
+      let gradientsOpacity = this.convertValueToOpacity(newMargLeft);
+      //console.log(gradientsOpacity)
       if (gradientsOpacity.length > 3) {
         return;
       }
 
-      if (gradientsOpacity <= 3) {
+      if (gradientsOpacity.length <= 3) {
         changeGradientsOpacity(gradientsOpacity)
       }
-      //console.log(this.convertValueToOpacity(newMargLeft), `what we want`);
-      //console.log(this.convertValueToOpacity(newMargLeft).length, `what we want length`)
-      //opacity = 
-      //changeGradientsOpacity(opacity)
     }
+
     if (newMargLeft < 0) {
       handle.style.marginLeft = "0px";
-      //console.log(newMargLeft)
+      changeGradientsOpacity('0')
     }
+
     if (newMargLeft > timelineWidth) {
       handle.style.marginLeft = timelineWidth + "px";
-      //console.log(newMargLeft)
+      changeGradientsOpacity('1')
     }
   }
 
@@ -80,18 +78,15 @@ class Slider extends Component {
     }
     
     if (target === 'opacity--range--handle') {
-      //console.log('hello handle');
+      this.setState({ animateHandle: 'none' })
     }
   }
 
   render() {
-    //console.log(this.props);
     const { animateHandle } = this.state;
     return (
-      <div className="header__range" style={{
-        background: 'green'
-      }}>
-        <div className="header__range--bar" id="opacity--range" onClick={this.moveHandle} onMouseDown={this.initMouseDown}></div>
+      <div className="header__range">
+        <div className="header__range--bar" id="opacity--range" onClick={this.moveHandle}></div>
         <div style={{
           transition: animateHandle
         }}className="header__range--handle" id="opacity--range--handle" onMouseDown={this.initMouseDown}></div>

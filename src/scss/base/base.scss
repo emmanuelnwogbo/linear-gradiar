@@ -17,3 +17,30 @@ body {
   background: rgba(236, 240, 241,1.0);
   background: linear-gradient(to right bottom, rgba(30, 55, 153,.1), rgba(236, 240, 241,1.0))
 }
+
+
+.feedback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  transition: all .6s;
+
+  &--text {
+    font-weight: 900;
+    margin: 0 auto;
+    font-size: 4rem;
+    height: 20%;
+    text-transform: uppercase;
+
+    &-copied {
+      font-size: 6rem;
+    }
+  }
+}

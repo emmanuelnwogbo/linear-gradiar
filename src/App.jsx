@@ -12,17 +12,48 @@ class App extends Component {
       initialRender: true,
       gradientsOpacityOne: `1`,
       gradientsOpacityTwo: `1`,
-      currentOpacityOption: 'both colors'
+      feedback_zIndex: `-1`,
+      feedback_opacity: `0`,
+      currentOpacityOption: 'both colors',
+      feedback: `linear-gradient(to right bottom, rgb(0, 76, 255), rgb(187, 0, 255))`
     }
   }
 
+  giveFeedBack = (feedback) => {
+    this.setState({
+      feedback_zIndex: `9000`,
+      feedback_opacity: `1`,
+      feedback
+    }, () => {
+      setTimeout(() => {
+        this.setState({
+          feedback_zIndex: `-1`,
+          feedback_opacity: `0`,
+        })
+      }, 600);
+    })
+  }
+
   changeGradientsOpacity = (opacity) => {
-    this.setState({ 
-      gradientsOpacityOne: opacity,
-      gradientsOpacityTwo: opacity,
-     }, () => {
-       //console.log(this.state.gradientsOpacityTwo)
-     })
+    const { currentOpacityOption } = this.state;
+    if (currentOpacityOption === `both colors`) {
+      return this.setState({ 
+        gradientsOpacityOne: opacity,
+        gradientsOpacityTwo: opacity,
+      });
+    }
+
+    if (currentOpacityOption === `first color`) {
+      return this.setState({ 
+        gradientsOpacityOne: opacity
+      });
+    }
+
+    if (currentOpacityOption === `second color`) {
+      return this.setState({
+        gradientsOpacityTwo: opacity,
+      });
+    }
   }
 
   changeOpacityOptions = (option) => {
@@ -46,8 +77,19 @@ class App extends Component {
   }
 
   render() {
+    const { feedback, feedback_zIndex, feedback_opacity } = this.state;
     return (
       <div>
+        <div className="feedback" style={{
+          background: feedback,
+          zIndex: feedback_zIndex,
+          opacity: feedback_opacity
+        }}>
+          <div className="feedback--text">
+            <p className="feedback--text-copied">copied!</p>
+            <p>{feedback}</p>
+          </div>
+        </div>
         <Header 
         changeGradDirection={this.changeGradDirection} 
         genGradientsFunctionApp={this.generateGradientsApp}
@@ -60,6 +102,7 @@ class App extends Component {
         initialRender={this.state.initialRender} 
         gradiantDirection={this.state.direction} 
         generateGradients={this.state.generateGradients}
+        giveFeedBack={this.giveFeedBack}
         />
       </div>
     )

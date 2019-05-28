@@ -30,7 +30,7 @@
     justify-content: center;
 
     &--bar {
-      width: 20rem;
+      width: 12rem;
       padding: .8rem 0;
       background: rgba(127, 140, 141,1.0);
       border-radius: 2rem;
@@ -46,6 +46,7 @@
       position: absolute;
       top: .7rem;
       left: 0;
+      margin-left: 10rem;
     }
   }
 
@@ -172,7 +173,6 @@
   &__gradient--direction-inputparent {
       width: 4%;
       height: 3rem;
-      background: red;
 
       &-input {
         width: 100%;
