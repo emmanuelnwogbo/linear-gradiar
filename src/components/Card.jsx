@@ -78,7 +78,6 @@ class Card extends Component {
   }
 
   componentWillUpdate() {
-    const { gradientsOpacityOne, gradientsOpacityTwo } = this.props;
     this.handleGradientPainting();
   }
 
