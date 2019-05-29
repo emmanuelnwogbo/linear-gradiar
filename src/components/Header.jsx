@@ -118,6 +118,13 @@ class Header extends Component {
     const { currentDirection, opacity } = this.state;
     return (
       <div className="header">
+      <span className="header__menuicon">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
         <div className="header--name">Gradiar</div>
         <div className="header--btn-tweet header--btn-generate" onClick={genGradientsFunctionApp}>Generate Colors</div>
         <div className="header__gradient--direction">
@@ -135,7 +142,7 @@ class Header extends Component {
           </div>
           <div className="header__gradient--direction">
             <p>{opacity}</p>
-            <div className="header__gradient--direction-menu">
+            <div className="header__gradient--direction-menu header__gradient--direction-menu-opacity">
               {this.renderDirectionSpansOpacity()}
             </div>
           </div>

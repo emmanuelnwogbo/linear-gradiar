@@ -88,9 +88,7 @@ class Container extends Component {
       [159, 0, 255, 255, 0, 210],
       [255, 209, 0, 0, 221, 255],
       [0, 255, 40, 255, 0, 76]
-    ]}), () => {
-      console.log(this.state)
-    })
+    ]}))
   }
 
   render() {

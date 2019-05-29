@@ -10,5 +10,10 @@
   color: rgba(236, 240, 241,1.0);
   text-transform: uppercase;
   text-align: center;
-  padding: 8rem 4rem;
+  padding: 9rem 4rem;
+  padding-bottom: 1rem;
+
+  @media only screen and (max-width: 76.25em) {
+    padding: 2.5rem 4rem;
+  }
 }

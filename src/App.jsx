@@ -15,7 +15,7 @@ class App extends Component {
       feedback_zIndex: `-1`,
       feedback_opacity: `0`,
       currentOpacityOption: 'both colors',
-      feedback: `linear-gradient(to right bottom, rgb(0, 76, 255), rgb(187, 0, 255))`
+      feedback: ``
     }
   }
 

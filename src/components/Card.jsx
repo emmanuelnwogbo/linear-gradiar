@@ -47,7 +47,7 @@ class Card extends Component {
     const range = document.createRange();
     const selection = window.getSelection();
     selection.removeAllRanges();
-    range.selectNodeContents(e.target.previousSibling);
+    range.selectNodeContents(e.target.nextSibling);
     selection.addRange(range);
     document.execCommand('copy');
     giveFeedBack(e.target.previousSibling.innerHTML)
@@ -92,7 +92,6 @@ class Card extends Component {
     } = this.props;
     if (firstGradient && secondGradient) {
       if (!initialRender && colors) {
-        console.log(initialRender, colors)
         const newColorOne = colors.colors[0];
         const newColorTwo = colors.colors[1];
         const rgbOne = `${this.hexToRgb(newColorOne).r}, ${this.hexToRgb(newColorOne).g}, ${this.hexToRgb(newColorOne).b}`;
@@ -108,8 +107,16 @@ class Card extends Component {
             overflow: 'hidden',
             zIndex: '-1',
             opacity: '0'
-          }}>{`linear-gradient(${gradiantDirection},rgb(${rgbOne},${gradientsOpacityOne}),rgb(${rgbTwo},${gradientsOpacityTwo}))`}</p>
+          }}>{`linear-gradient(${gradiantDirection},rgba(${rgbOne},${gradientsOpacityOne}),rgba(${rgbTwo},${gradientsOpacityTwo}))`}</p>
             <div className="card--btn btn" onClick={this.copyGradToClipBoard}>copy</div>
+            <p style={{
+              textTransform: 'lowercase',
+              position: 'absolute',
+              width: '10%',
+              overflow: 'hidden',
+              zIndex: '-1',
+              opacity: '0'
+            }}>{`linear-gradient(${gradiantDirection},rgba(${rgbOne},${gradientsOpacityOne}),rgba(${rgbTwo},${gradientsOpacityTwo}));`}</p>
           </div>
         )
       }
@@ -126,6 +133,14 @@ class Card extends Component {
             opacity: '0'
             }}>{`linear-gradient(${gradiantDirection},rgba(${firstGradient},${gradientsOpacityOne}),rgba(${secondGradient}, ${gradientsOpacityTwo}))`}</p>
           <div className="card--btn btn" onClick={this.copyGradToClipBoard}>copy</div>
+          <p style={{
+            textTransform: 'lowercase',
+            position: 'absolute',
+            width: '10%',
+            overflow: 'hidden',
+            zIndex: '-1',
+            opacity: '0'
+            }}>{`linear-gradient(${gradiantDirection},rgba(${firstGradient},${gradientsOpacityOne}),rgba(${secondGradient}, ${gradientsOpacityTwo}));`}</p>
         </div>
       )
     }
