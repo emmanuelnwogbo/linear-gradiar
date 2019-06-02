@@ -1,95 +1,56 @@
 import React, { Component } from 'react';
+import '../scss/components/slider.scss';
 
 class Slider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      animateHandle: 'none'
+      value: 10
     };
   }
 
-  getElementPosition = (element) => {
-    return element.getBoundingClientRect().left;
+  changeValue = (e) => {
+    const { value } = e.target;
+    this.setState({ value });
   }
 
-  convertValueToOpacity = (value) => {
-    const dec = value/100;
-    const decString = dec.toString();
-    const decArray = decString.split('');
-    const filteredDecArray = decArray.filter(
-      element => decArray.indexOf(element) <= 2
-      );
-    const filteredDecArrayString = filteredDecArray.toString();
-    const result = filteredDecArrayString.replace(/,/g, '')
+  handleInputChange = (e) => {
+   const { changeGradientsOpacity } = this.props;
+   const num = e.target.value;
+   const decimal = num/100;
+   const str = decimal.toString();
+   const arr = Array.from(str);
+   const arr2 = []
 
-    return result;
-  }
+   if(arr.length === 4) {
+     let tracker = 0;
+     arr.map(elem => {
+       tracker+=1;
+       if (tracker === 3) {
+        arr2.push(`${elem}.`)
+       }
+       if (tracker === 4) {
+        arr2.push(`${elem}`)
+       }
+     })
 
-  moveHandle = (event) => {
-    console.log('moving handle', event.target.id);
-    const { changeGradientsOpacity } = this.props;
-    const timeline = document.getElementById('opacity--range');
-    const handle = document.getElementById('opacity--range--handle');
-    const timelineWidth = timeline.offsetWidth - handle.offsetWidth;
-    const newMargLeft = event.clientX - this.getElementPosition(timeline);
+     const filteredArr2 = arr2.toString();
+     const result = filteredArr2.replace(/,/g, '');
+     return changeGradientsOpacity(result)
+   }
 
-    if (newMargLeft >= 0 && newMargLeft <= timelineWidth) {
-      handle.style.marginLeft = newMargLeft + "px";
-      console.log(newMargLeft);
-      let gradientsOpacity = this.convertValueToOpacity(newMargLeft);
-      //console.log(gradientsOpacity)
-      if (gradientsOpacity.length > 3) {
-        return;
-      }
-
-      if (gradientsOpacity.length <= 3) {
-        changeGradientsOpacity(gradientsOpacity)
-      }
-    }
-
-    if (newMargLeft < 0) {
-      handle.style.marginLeft = "0px";
-      changeGradientsOpacity('0')
-    }
-
-    if (newMargLeft > timelineWidth) {
-      handle.style.marginLeft = timelineWidth + "px";
-      changeGradientsOpacity('1')
-    }
-  }
-
-  deInitMouseDown = () => {
-    const { animateHandle } = this.state;
-    if (animateHandle !== 'none') {
-      setTimeout(() => {
-        this.setState({ animateHandle: 'none' })
-      }, 200);
-    }
-    window.removeEventListener('mousemove', this.moveHandle, true);
-  }
-
-  initMouseDown = (event) => {
-    const target = event.target.id;
-    window.addEventListener('mousemove', this.moveHandle, true);
-    window.addEventListener('mouseup', this.deInitMouseDown, false);
-
-    if (target === 'opacity--range') {
-      this.setState({ animateHandle: `all .1s` })
-    }
-    
-    if (target === 'opacity--range--handle') {
-      this.setState({ animateHandle: 'none' })
-    }
+   return changeGradientsOpacity(1);
   }
 
   render() {
-    const { animateHandle } = this.state;
+    const { value } = this.state;
     return (
-      <div className="header__range">
-        <div className="header__range--bar" id="opacity--range" onClick={this.moveHandle}></div>
-        <div style={{
-          transition: animateHandle
-        }}className="header__range--handle" id="opacity--range--handle" onMouseDown={this.initMouseDown}></div>
+      <div className={`slider`}>
+        <input 
+        onInput={this.handleInputChange} 
+        className={`slider__range`} 
+        min="1" max="10" type='range' value={value} step="1"
+        onChange={this.changeValue}></input>
       </div>
     )
   }

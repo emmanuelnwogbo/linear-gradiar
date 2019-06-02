@@ -128,34 +128,6 @@
     }
   }
 
-  &__range {
-    position: relative;
-    display: flex;
-    height: 4rem;
-    align-items: center;
-    justify-content: center;
-
-    &--bar {
-      width: 12rem;
-      padding: .8rem 0;
-      background: rgba(127, 140, 141,1.0);
-      border-radius: 2rem;
-      cursor: pointer;
-    }
-
-    &--handle {
-      height: 2.5rem;
-      width: 2.5rem;
-      background: linear-gradient(to right, #302B63, #0F0C29);;
-      border-radius: 50%;
-      cursor: pointer;
-      position: absolute;
-      top: .7rem;
-      left: 0;
-      margin-left: 10rem;
-    }
-  }
-
   &__svgs {
     justify-self: end;
 
