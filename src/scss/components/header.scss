@@ -152,7 +152,8 @@
   &--btn-tweet {
     &,
     &:link,
-    &:visited {
+    &:visited
+    &:active {
       outline: none;
       justify-self: end;
       background: #03A9F4;
@@ -162,8 +163,7 @@
       font-size: 1.3rem;
       cursor: pointer;
       transition: all .2s;
-
-      
+      text-decoration: none;
     }
   }
 

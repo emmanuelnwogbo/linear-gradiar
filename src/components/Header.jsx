@@ -113,6 +113,17 @@ class Header extends Component {
     }
   }
 
+  openValWindow = (e) => {
+    const target = e.target;
+    if (target.id === `github-svg` || target.id === `github-svg-use`) {
+      return window.open('https://github.com/emmanuelnwogbo/linear-gradiar', '_blank');
+    }
+
+    if (target.id === `codepen-svg` || target.id === `codepen-svg-use`) {
+      return window.open('https://codepen.io/nerdyemmanuel/', '_blank');
+    }
+  }
+
   render() {
     const { genGradientsFunctionApp, changeGradientsOpacity } = this.props;
     const { currentDirection, opacity } = this.state;
@@ -149,17 +160,23 @@ class Header extends Component {
         </div>
         <Slider changeGradientsOpacity={changeGradientsOpacity}/>
         <div className="header__svgs">
-          <svg className="header__svgs--svg">
-            <use xlinkHref="./img/sprite.svg#icon-github1" />
+          <svg className="header__svgs--svg" onClick={this.openValWindow} id={`github-svg`}>
+            <use xlinkHref="./img/sprite.svg#icon-github1" id={`github-svg-use`}/>
           </svg>
-          <svg className="header__svgs--svg">
-            <use xlinkHref="./img/sprite.svg#icon-codepen" />
+          <svg className="header__svgs--svg" onClick={this.openValWindow} id={`codepen-svg`}>
+            <use xlinkHref="./img/sprite.svg#icon-codepen" id={`codepen-svg-use`}/>
           </svg>
         </div>
-        <div className="header--btn-tweet header--btn-tweet-btnposition">Tweet</div>
+        <a href="https://twitter.com/intent/tweet?button_hashtag=iloveGradiar&ref_src=twsrc%5Etfw" 
+        className="twitter-hashtag-button header--btn-tweet header--btn-tweet-btnposition" 
+        data-size="large" 
+        data-text="check out this useful gradient generator by @nerdyemmanuel" 
+        data-url="https://emmanuelnwogbo.github.io/linear-gradiar" 
+        data-show-count="false">Tweet #iloveGradiar</a> 
       </div>
     )
   }
 }
 
 export default Header;
+//no logs
