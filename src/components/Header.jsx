@@ -168,7 +168,7 @@ class Header extends Component {
           </svg>
         </div>
         <a href="https://twitter.com/intent/tweet?button_hashtag=iloveGradiar&ref_src=twsrc%5Etfw" 
-        className="twitter-hashtag-button header--btn-tweet header--btn-tweet-btnposition" 
+        className="twitter-hashtag-button" 
         data-size="large" 
         data-text="check out this useful gradient generator by @nerdyemmanuel" 
         data-url="https://emmanuelnwogbo.github.io/linear-gradiar" 
